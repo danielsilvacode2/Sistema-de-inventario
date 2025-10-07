@@ -1,0 +1,3 @@
+db.url = jdbc:mysql://localhost:3306/product
+db.user = root
+db.password = Madalu05@
