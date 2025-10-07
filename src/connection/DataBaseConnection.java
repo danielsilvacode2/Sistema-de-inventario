@@ -13,6 +13,7 @@ public class DataBaseConnection {
     public static Connection getConnection() {
 
         try {
+
             
             Properties props = loadProperties();
             String URL = props.getProperty("db.url");
