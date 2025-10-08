@@ -22,11 +22,13 @@ public class ManagerProduct {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
+
                 int id_product = rs.getInt("Id_product");
                 String name = rs.getString("Name");
                 Double price = rs.getDouble("Price");
 
                 list.add(new Product(name, id_product, price));
+
             }
 
         } catch (SQLException e) {
@@ -34,6 +36,7 @@ public class ManagerProduct {
         }
 
         return list;
+
     }
 
     public static List<Product> updateProduct(List<Product> list) {
@@ -41,6 +44,7 @@ public class ManagerProduct {
         String sql = "update tableproduct set name = ? , price = ? where id_product = ?";
 
         try (Connection conn = DataBaseConnection.getConnection()) {
+
             PreparedStatement st = conn.prepareStatement(sql);
 
             for (Product p : list) {
@@ -67,24 +71,33 @@ public class ManagerProduct {
 
         String sql = "insert into tableproduct (name,price) values (?,?)";
 
-            try (Connection conn = DataBaseConnection.getConnection()) {
-                PreparedStatement st = conn.prepareStatement(sql);
-                st.setString(1, name);
-                st.setDouble(2, price);
-                st.executeUpdate();
-            } catch (SQLException e) {
-                System.out.println("error :" + e.getMessage());
-            }
-
-    }
-    public static void removeProduto(int id){
-        String sql = "delete from tableproduct where id_product = ?";
         try (Connection conn = DataBaseConnection.getConnection()) {
+
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1,id);
+            st.setString(1, name);
+            st.setDouble(2, price);
             st.executeUpdate();
-        }catch (SQLException e ){
+
+        } catch (SQLException e) {
             System.out.println("error :" + e.getMessage());
         }
+
     }
+
+    public static void removeProduto(int id) {
+
+        String sql = "delete from tableproduct where id_product = ?";
+
+        try (Connection conn = DataBaseConnection.getConnection()) {
+
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("error :" + e.getMessage());
+        }
+
+    }
+
 }

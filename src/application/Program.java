@@ -3,7 +3,6 @@ package application;
 import entities.Product;
 import services.ManagerProduct;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +16,8 @@ public class Program {
         System.out.println("iniciando programa");
 
         escolherOperacao(sc);
+
+        sc.close();
     }
 
     public static void escolherOperacao(Scanner sc) {
@@ -41,7 +42,7 @@ public class Program {
                 loop = realizarOperacao(operacao, sc);
             } catch (InputMismatchException e) {
                 sc.nextLine();
-                System.out.println("digite apenas numeros inteiros ! ! !");
+                System.out.println("digite  uma entrada valida ! ! !");
             }
 
         }
@@ -113,29 +114,41 @@ public class Program {
 
                 System.out.print("quantos produtos vocer quer adicionar? ");
                 int totalPadd = sc.nextInt();
+
                 System.out.println();
                 sc.nextLine();
 
+                System.out.println("(adicionando produtos) ");
+
                 for (int i = 1; i <= totalPadd; i++) {
+
+                    System.out.println("( adicionando protudo (" + i + ") )");
 
                     System.out.print("name: ");
                     String name = sc.nextLine();
+
                     System.out.print("price: ");
                     Double price = sc.nextDouble();
+
                     sc.nextLine();
 
                     ManagerProduct.addPorduct(name, price);
                 }
+
                 System.out.println("produto(s) adicionado(s) !");
+
                 break;
+
             case 4:
 
                 System.out.print("quantos produtos vocer quer remover? ");
                 int totalPremove = sc.nextInt();
 
                 for (int i = 1; i <= totalPremove; i++) {
+
                     System.out.print("digite o id do produto que voce quer remover: ");
                     int id = sc.nextInt();
+
                     ManagerProduct.removeProduto(id);
                 }
 
@@ -144,7 +157,7 @@ public class Program {
                 break;
 
             case 5:
-                System.out.println("saindo!!!");
+                System.out.println("encerrando programa!!!");
                 return false;
             default:
                 System.out.println("operacao inexistente ");
